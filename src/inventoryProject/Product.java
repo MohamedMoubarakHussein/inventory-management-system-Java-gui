@@ -209,6 +209,7 @@ public class Product extends javax.swing.JFrame {
         productTable.setMinimumSize(new java.awt.Dimension(45, 0));
         productTable.setName(""); // NOI18N
         productTable.setRowHeight(25);
+        productTable.setSelectionBackground(new java.awt.Color(255, 51, 51));
         jScrollPane1.setViewportView(productTable);
 
         jLabel2.setBackground(new java.awt.Color(255, 255, 255));

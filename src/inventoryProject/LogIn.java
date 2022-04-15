@@ -4,13 +4,11 @@ import java.util.*;
 import java.io.*;
 import javax.swing.JOptionPane;
 
-
 public class LogIn extends javax.swing.JFrame {
             
     public LogIn() {
         initComponents();
     }
-    
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -235,52 +233,47 @@ public class LogIn extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
  
-    boolean checkData(){
-            File  myfile = new File("D:\\Z - PC\\Computer Science\\level 2\\JAVA\\Project\\myfolder\\myfile.txt");
-            try {
-                Scanner input = new Scanner(myfile);
-                while(input.hasNext()){
-                    String line = input.nextLine();
-                    String[] values = line.split("\t");
-                    
-                    if(values[0].equals(idLogin.getText()))
-                        if(values[1].equals(passLogin.getText()))
-                            return true;
-                        else{
-                            return false;
-                        }
+    boolean checkData() {
+        File myfile = new File("D:\\Z - PC\\Computer Science\\level 2\\JAVA\\Project\\myfolder\\myfile.txt");
+        try {
+            Scanner input = new Scanner(myfile);
+            while (input.hasNext()) {
+                String line = input.nextLine();
+                String[] values = line.split("\t");
+
+                if (values[0].equals(idLogin.getText())) {
+                    if (values[1].equals(passLogin.getText()))
+                        return true;
+                    else
+                        return false;
                 }
-                        
-            }catch(FileNotFoundException e){
-                return false;
             }
+        } catch (FileNotFoundException e) {
+            System.out.println("Error");
+        }
         return false;
     }
-    
     
     private void exitAppMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitAppMouseClicked
         System.exit(0);
     }//GEN-LAST:event_exitAppMouseClicked
 
     private void loginMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_loginMouseClicked
-       //readFile();
         do {
             if (checkData()) {
                 new Home().setVisible(true);
-                this.dispose();
-                
                 JOptionPane.showMessageDialog(null, "Successfuly Login!");
+                this.dispose();
                 break;
-
+                
             } else {
                 JOptionPane.showMessageDialog(null, "Wrong ID or Password or Incomplete information !!");
             }
         } while (checkData());
-
     }//GEN-LAST:event_loginMouseClicked
 
     private void signUpMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_signUpMouseClicked
-        new SignUp().setVisible(true);
+        new SignUpWindow().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_signUpMouseClicked
 
@@ -288,32 +281,7 @@ public class LogIn extends javax.swing.JFrame {
         idLogin.setText("");
         passLogin.setText("");
     }//GEN-LAST:event_clearLoginMouseClicked
-
-    
-    
-        
-//    void readFile() {
-//        try {
-//            FileReader fr = new FileReader("D:\\Z - PC\\Computer Science\\JAVA\\myfolder\\myfile.txt");
-//            System.out.println("file exists");
-//            
-//            try {
-//                int read;
-//                while((read = fr.read()) != '\n'){
-//                    System.out.print((char)read);
-//                }
-//                System.out.println("");
-//                
-//            } catch (IOException ex) {
-//                
-//            }
-            
-//        } catch (FileNotFoundException ex) {
-//            System.out.println("Error!! file not exists");
-//        }
-//    }
-   
-    
+ 
     public static void main(String args[]) {
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -337,17 +305,9 @@ public class LogIn extends javax.swing.JFrame {
         }
         //</editor-fold>
         
-        LogIn login = new LogIn();
-        login.setVisible(true);
-    
-//        java.awt.EventQueue.invokeLater(new Runnable() {
-//            public void run() {
-//                new LogIn().setVisible(true);
-//            }
-//        });
+        new LogIn().setVisible(true);
     }
 
-    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton clearLogin;
     private javax.swing.JButton exitApp;

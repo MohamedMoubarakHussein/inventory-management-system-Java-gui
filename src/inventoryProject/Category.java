@@ -54,7 +54,7 @@ public class Category extends javax.swing.JFrame {
     }
   
     void showCat(){
-        DefaultTableModel model = (DefaultTableModel) catTable.getModel();
+        DefaultTableModel model = (DefaultTableModel) categoryTable.getModel();
 
         try {
             File myfile = new File("D:\\Z - PC\\Computer Science\\level 2\\JAVA\\Project\\myfolder\\category.txt");
@@ -84,7 +84,7 @@ public class Category extends javax.swing.JFrame {
         exitApp = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        catTable = new javax.swing.JTable();
+        categoryTable = new javax.swing.JTable();
         jLabel3 = new javax.swing.JLabel();
         idCat = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
@@ -172,8 +172,8 @@ public class Category extends javax.swing.JFrame {
                 .addContainerGap(15, Short.MAX_VALUE))
         );
 
-        catTable.setFont(new java.awt.Font("Century Schoolbook", 3, 20)); // NOI18N
-        catTable.setModel(new javax.swing.table.DefaultTableModel(
+        categoryTable.setFont(new java.awt.Font("Century Schoolbook", 3, 20)); // NOI18N
+        categoryTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -181,12 +181,12 @@ public class Category extends javax.swing.JFrame {
                 "ID", "Name"
             }
         ));
-        catTable.setIntercellSpacing(new java.awt.Dimension(0, 0));
-        catTable.setRowHeight(25);
-        catTable.setSelectionBackground(new java.awt.Color(255, 51, 51));
-        catTable.setSelectionForeground(new java.awt.Color(51, 51, 51));
-        catTable.setShowGrid(true);
-        jScrollPane2.setViewportView(catTable);
+        categoryTable.setIntercellSpacing(new java.awt.Dimension(0, 0));
+        categoryTable.setRowHeight(25);
+        categoryTable.setSelectionBackground(new java.awt.Color(255, 51, 51));
+        categoryTable.setSelectionForeground(new java.awt.Color(51, 51, 51));
+        categoryTable.setShowGrid(true);
+        jScrollPane2.setViewportView(categoryTable);
 
         jLabel3.setBackground(new java.awt.Color(255, 255, 255));
         jLabel3.setFont(new java.awt.Font("Century Schoolbook", 3, 24)); // NOI18N
@@ -244,28 +244,25 @@ public class Category extends javax.swing.JFrame {
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel10)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(idCat, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel9)
-                                .addGap(18, 18, 18)
-                                .addComponent(name, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(add, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(28, 28, 28)
-                                .addComponent(edit, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(delete, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(66, 66, 66)))))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                            .addComponent(jLabel10)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(idCat, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                            .addComponent(jLabel9)
+                            .addGap(18, 18, 18)
+                            .addComponent(name, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                            .addComponent(add, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(28, 28, 28)
+                            .addComponent(edit, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                            .addComponent(delete, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(66, 66, 66))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 484, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -330,39 +327,9 @@ public class Category extends javax.swing.JFrame {
 
     
     private void deleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deleteMouseClicked
-        String path = "D:\\Z - PC\\Computer Science\\level 2\\JAVA\\Project\\myfolder\\category.txt";
-        File myfile = new File(path);
-
-        try {
-            FileWriter fw = new FileWriter(myfile);
-            BufferedWriter bw = new BufferedWriter(fw);
-
-            DefaultTableModel model = (DefaultTableModel) catTable.getModel();
-
-            if(catTable.getSelectedRowCount() == 1){
-                model.removeRow(catTable.getSelectedRow());
-
-                for(int i=0 ; i<catTable.getRowCount() ; i++){
-                    for(int j=0 ; j<catTable.getColumnCount() ; j++){
-
-                        bw.write(catTable.getValueAt(i, j) + "\t");
-                    }
-                    bw.newLine();
-                }
-
-                bw.close();
-                fw.close();
-
-                JOptionPane.showMessageDialog(null, "Deleted Done!!");
-            }
-
-            else {
-                JOptionPane.showMessageDialog(null, "Please Clicked in \"SHOW USERS\" First\nThen Select one Row from table!!");
-            }
-
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, "Error");
-        }
+        Files f = new Files();
+        Methods method = new Methods();
+        method.delete(f.getCategoryFile(), categoryTable);
     }//GEN-LAST:event_deleteMouseClicked
 
     private void editMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_editMouseClicked
@@ -373,16 +340,16 @@ public class Category extends javax.swing.JFrame {
             FileWriter fw = new FileWriter(myfile);
             BufferedWriter bw = new BufferedWriter(fw);
 
-            DefaultTableModel model = (DefaultTableModel) catTable.getModel();
+            DefaultTableModel model = (DefaultTableModel) categoryTable.getModel();
 
-            currentRow = catTable.getSelectedRow();
+            currentRow = categoryTable.getSelectedRow();
             model.setValueAt(idCat.getText(), currentRow, 0);
             model.setValueAt(name.getText(), currentRow, 1);
-            if (catTable.getSelectedRowCount() == 1) {
-                for (int i = 0; i < catTable.getRowCount(); i++) {
-                    for (int j = 0; j < catTable.getColumnCount(); j++) {
+            if (categoryTable.getSelectedRowCount() == 1) {
+                for (int i = 0; i < categoryTable.getRowCount(); i++) {
+                    for (int j = 0; j < categoryTable.getColumnCount(); j++) {
 
-                        bw.write(catTable.getValueAt(i, j) + "\t");
+                        bw.write(categoryTable.getValueAt(i, j) + "\t");
                     }
                     bw.newLine();
                 }
@@ -412,7 +379,7 @@ public class Category extends javax.swing.JFrame {
             idCat.setText("");
             name.setText("");
 
-            DefaultTableModel model = (DefaultTableModel)catTable.getModel();
+            DefaultTableModel model = (DefaultTableModel)categoryTable.getModel();
             model.setNumRows(0);
 
             try {
@@ -467,7 +434,7 @@ public class Category extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton add;
     private javax.swing.JButton back;
-    private javax.swing.JTable catTable;
+    private javax.swing.JTable categoryTable;
     private javax.swing.JButton delete;
     private javax.swing.JButton edit;
     private javax.swing.JButton exitApp;

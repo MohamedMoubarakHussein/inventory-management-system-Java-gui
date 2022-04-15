@@ -407,38 +407,9 @@ public class Customer extends javax.swing.JFrame {
 
     
     private void deleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deleteMouseClicked
-        String path = "D:\\Z - PC\\Computer Science\\level 2\\JAVA\\Project\\myfolder\\customer.txt";
-        File myfile = new File(path);
-
-        try {
-            FileWriter fw = new FileWriter(myfile);
-            BufferedWriter bw = new BufferedWriter(fw);
-            DefaultTableModel model = (DefaultTableModel) custTable.getModel();
-
-            if(custTable.getSelectedRowCount() == 1){
-                model.removeRow(custTable.getSelectedRow());
-
-                for(int i=0 ; i<custTable.getRowCount() ; i++){
-                    for(int j=0 ; j<custTable.getColumnCount() ; j++){
-
-                        bw.write(custTable.getValueAt(i, j) + "\t");
-                    }
-                    bw.newLine();
-                }
-
-                bw.close();
-                fw.close();
-
-                JOptionPane.showMessageDialog(null, "Deleted Done!!");
-            }
-
-            else {
-                JOptionPane.showMessageDialog(null, "Please Select only one Row from table!!");
-            }
-
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, "Error");
-        }
+        Files f = new Files();
+        Methods method = new Methods();
+        method.delete(f.getCustomerFile(), custTable);
     }//GEN-LAST:event_deleteMouseClicked
 
     

@@ -2,6 +2,9 @@ package inventoryProject;
 
 public class Home extends javax.swing.JFrame {
 
+    Files f = new Files();
+    Methods method = new Methods();
+   
     public Home() {
         initComponents();
     }
@@ -325,10 +328,10 @@ public class Home extends javax.swing.JFrame {
     }//GEN-LAST:event_exitAppMouseClicked
 
     private void usersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_usersMouseClicked
-        User user = new User();
+        UserWindow user = new UserWindow();
         user.setVisible(true);
-        user.showUsers();
         
+        method.showData(f.getMyFile(), user.getUserTable());
         this.dispose();
     }//GEN-LAST:event_usersMouseClicked
 
@@ -338,10 +341,10 @@ public class Home extends javax.swing.JFrame {
     }//GEN-LAST:event_logOutMouseClicked
 
     private void productMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_productMouseClicked
-        Product product = new Product();
+        ProductWindow product = new ProductWindow();
         product.setVisible(true);
-        product.showProdut();
-
+        
+        method.showData(f.getProductFile(), product.getProductTable());
         this.dispose();
     }//GEN-LAST:event_productMouseClicked
 
@@ -366,7 +369,6 @@ public class Home extends javax.swing.JFrame {
         order.setVisible(true);
         order.showCust();
         order.showProdut();
-        //order.showOrder();
         order.getToday();
         
         this.dispose();

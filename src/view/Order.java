@@ -1,16 +1,16 @@
 package view;
 
 import java.io.*;
+import java.util.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.*;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
-public class OrderWindow extends javax.swing.JFrame {
+public class Order extends javax.swing.JFrame {
     int currentRow;
     
-    public OrderWindow() {
+    public Order() {
         initComponents();
     }
 
@@ -478,25 +478,6 @@ public class OrderWindow extends javax.swing.JFrame {
         }
     }
     
-    
-//    void showOrder() {
-//        DefaultTableModel model = (DefaultTableModel) orderTable.getModel();
-//
-//        try {
-//            File myfile = new File("D:\\Z - PC\\Computer Science\\level 2\\JAVA\\Project\\myfolder\\order.txt");
-//            Scanner input = new Scanner(myfile);
-//
-//            while (input.hasNext()) {
-//                String line = input.nextLine();
-//                String[] row = line.split("\t");
-//                model.addRow(row);
-//            }
-//
-//        } catch (FileNotFoundException ex) {
-//
-//        }
-//    }
-    
     private void exitAppMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitAppMouseClicked
         System.exit(0);
     }//GEN-LAST:event_exitAppMouseClicked
@@ -513,10 +494,8 @@ public class OrderWindow extends javax.swing.JFrame {
         } catch(Exception ex) {
             ex.printStackTrace();
         }
-        
         price.setText("");
         quantity.setText("");
-        
     }//GEN-LAST:event_printOrderMouseClicked
 
     private void addToOrderMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addToOrderMouseClicked
@@ -524,7 +503,6 @@ public class OrderWindow extends javax.swing.JFrame {
         currentRow = productTable.getSelectedRow();
         
         Vector v = new Vector();
-        
         if (custTable.getSelectedRowCount() == 1 && productTable.getSelectedRowCount() == 1 
                 && custName.getText() != "Name" && !price.getText().isEmpty() && !quantity.getText().isEmpty()) {
             
@@ -579,25 +557,19 @@ public class OrderWindow extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(OrderWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Order.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(OrderWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Order.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(OrderWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Order.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(OrderWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Order.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         //</editor-fold>
 
-        
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new OrderWindow().setVisible(true);
-            }
-        });
-        
-        
+        new Order().setVisible(true);
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

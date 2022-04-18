@@ -158,7 +158,6 @@ public class Start extends javax.swing.JFrame {
         new LogInWindow().setVisible(true);
         start.dispose();
     }
-
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;

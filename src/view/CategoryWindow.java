@@ -1,7 +1,7 @@
 package view;
 
-import model.Files;
-import model.Methods;
+import controller.*;
+import model.*;
 import java.util.*;
 import java.io.*;
 import javax.swing.JOptionPane;
@@ -424,9 +424,7 @@ public class CategoryWindow extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(CategoryWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-        //</editor-fold>
 
-        
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new CategoryWindow().setVisible(true);

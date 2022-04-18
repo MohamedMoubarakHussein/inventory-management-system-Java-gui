@@ -1,7 +1,7 @@
 package view;
 
-import model.Files;
-import model.Methods;
+import controller.*;
+import model.*;
 
 public class Home extends javax.swing.JFrame {
 
@@ -308,7 +308,7 @@ public class Home extends javax.swing.JFrame {
     }//GEN-LAST:event_customerMouseClicked
 
     private void orderMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_orderMouseClicked
-        OrderWindow order = new OrderWindow();
+        Order order = new Order();
         order.setVisible(true);
         order.showCust();
         order.showProdut();
@@ -334,7 +334,6 @@ public class Home extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_usersMouseClicked
 
-        
 
     public static void main(String args[]) {
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -362,7 +361,6 @@ public class Home extends javax.swing.JFrame {
         new Home().setVisible(true);
             
     }
-
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton category;

@@ -243,7 +243,7 @@ public class LogInWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_exitAppMouseClicked
 
     private void signUpMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_signUpMouseClicked
-        new SignUpWindow().setVisible(true);
+        new AdminWindow().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_signUpMouseClicked
 

@@ -1,12 +1,13 @@
-package model;
+package controller;
 
-import controller.*;
 import java.io.*;
 import java.util.*;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import model.Admin;
+import model.User;
 
-public  class Methods {
+public class Methods {
     
     private int line;
     Files f = new Files();
@@ -30,7 +31,7 @@ public  class Methods {
         }
     }
     
-    public void add(SignUp s ,File f) {
+    public void add(Admin s ,File f) {
         try {
             RandomAccessFile raf = new RandomAccessFile(f, "rw");
             for(int i=0 ; i<line ; i++){
@@ -40,7 +41,6 @@ public  class Methods {
             raf.writeBytes(s.getName() + "\t");
             raf.writeBytes(s.getID() + "\t");
             raf.writeBytes(s.getPassword() + "\t\n");
-            
 
         } catch (IOException ex) {
 

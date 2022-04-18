@@ -1,7 +1,7 @@
 package view;
 
-import model.Files;
-import model.Methods;
+import controller.*;
+import model.*;
 import java.io.*;
 import java.util.*;
 import javax.swing.JOptionPane;

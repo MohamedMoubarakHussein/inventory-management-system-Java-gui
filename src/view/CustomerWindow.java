@@ -9,10 +9,13 @@ import javax.swing.table.DefaultTableModel;
 
 public class CustomerWindow extends javax.swing.JFrame {
 
-    private int line, currentRow;
+    CustomerMethod customer = new CustomerMethod();
+    Methods method = new Methods();
+    Files f = new Files();
     
     public CustomerWindow() {
         initComponents();
+        method.showData(f.getCustomerFile(), this.getTable());
     }
 
     @SuppressWarnings("unchecked")
@@ -24,7 +27,6 @@ public class CustomerWindow extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         custTable = new javax.swing.JTable();
         id = new javax.swing.JTextField();
-        phone = new javax.swing.JPasswordField();
         jLabel3 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
@@ -39,6 +41,7 @@ public class CustomerWindow extends javax.swing.JFrame {
         edit = new javax.swing.JButton();
         delete = new javax.swing.JButton();
         add = new javax.swing.JButton();
+        phone = new javax.swing.JTextField();
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -74,9 +77,6 @@ public class CustomerWindow extends javax.swing.JFrame {
 
         id.setFont(new java.awt.Font("Century Schoolbook", 1, 20)); // NOI18N
         id.setForeground(new java.awt.Color(255, 51, 51));
-
-        phone.setFont(new java.awt.Font("Century Schoolbook", 3, 20)); // NOI18N
-        phone.setForeground(new java.awt.Color(255, 51, 51));
 
         jLabel3.setBackground(new java.awt.Color(255, 255, 255));
         jLabel3.setFont(new java.awt.Font("Century Schoolbook", 3, 24)); // NOI18N
@@ -201,6 +201,9 @@ public class CustomerWindow extends javax.swing.JFrame {
             }
         });
 
+        phone.setFont(new java.awt.Font("Century Schoolbook", 1, 20)); // NOI18N
+        phone.setForeground(new java.awt.Color(255, 51, 51));
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -224,8 +227,8 @@ public class CustomerWindow extends javax.swing.JFrame {
                                             .addComponent(jLabel9))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(name, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(phone, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                            .addComponent(name, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(phone, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(21, 21, 21)
                                 .addComponent(add, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -294,67 +297,18 @@ public class CustomerWindow extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
     
-    boolean addData(){
-        try {
-            RandomAccessFile raf = new RandomAccessFile("D:\\Z - PC\\Computer Science\\level 2\\JAVA\\Project\\myfolder\\customer.txt", "rw");
-            for(int i=0 ; i < line ; i++){
-                raf.readLine();
-            }
-            raf.writeBytes(id.getText() + "\t");
-            raf.writeBytes(name.getText() + "\t");
-            raf.writeBytes(phone.getText() + "\t\n");
-            return true;
-
-        } catch (IOException ex) {
-            return false;
-        }
+    public DefaultTableModel getTable() {
+        return (DefaultTableModel)custTable.getModel();
     }
     
     boolean checkData(){
-        if(name.getText().equals("")||id.getText().equals("") || phone.getText().equals(""))
+        if(!name.getText().isEmpty() && !id.getText().isEmpty() && !phone.getText().isEmpty())
             return true;
         else
             return false;
     }
-      
-    void countLine() {
-        try {
-            line =1;
-            RandomAccessFile raf = new RandomAccessFile("D:\\Z - PC\\Computer Science\\level 2\\JAVA\\Project\\myfolder\\customer.txt", "rw");
-            while(raf.readLine() != null){
-                line++;
-            }
-            System.out.println("number of line: " + line);
-            
-        } catch (FileNotFoundException ex) {
-            
-        } catch (IOException ex) {
-            
-        }
-
-    }
-  
-    void showCust(){
-        DefaultTableModel model = (DefaultTableModel) custTable.getModel();
-
-        try {
-            File myfile = new File("D:\\Z - PC\\Computer Science\\level 2\\JAVA\\Project\\myfolder\\customer.txt");
-            Scanner input = new Scanner(myfile);
-
-            while (input.hasNext()) {
-                String line = input.nextLine();
-                String[] row = line.split("\t");
-                model.addRow(row);
-            }
-
-        } catch (FileNotFoundException ex) {
-
-        }
-    }
-  
-    
+       
     private void exitAppMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitAppMouseClicked
         System.exit(0);
     }//GEN-LAST:event_exitAppMouseClicked
@@ -364,91 +318,36 @@ public class CustomerWindow extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_backHomeMouseClicked
 
-    
     private void editMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_editMouseClicked
-        String path = "D:\\Z - PC\\Computer Science\\level 2\\JAVA\\Project\\myfolder\\customer.txt";
-        File myfile = new File(path);
-
-        try {
-            DefaultTableModel model = (DefaultTableModel) custTable.getModel();
-
-            if(checkData()) {
-                JOptionPane.showMessageDialog(null, "Incomplete Information!! \nPlease Complete Information and select only one row!!");
-
-            }
-            else {
-                FileWriter fw = new FileWriter(myfile);
-                BufferedWriter bw = new BufferedWriter(fw);
-
-                currentRow = custTable.getSelectedRow();
-                model.setValueAt(id.getText(), currentRow, 0);
-                model.setValueAt(name.getText(), currentRow, 1);
-                model.setValueAt(phone.getText(), currentRow, 2);
-
-                if (custTable.getSelectedRowCount() == 1) {
-                    for (int i = 0; i < custTable.getRowCount(); i++) {
-                        for (int j = 0; j < custTable.getColumnCount(); j++) {
-
-                            bw.write(custTable.getValueAt(i, j) + "\t");
-                        }
-                        bw.newLine();
-                    }
-
-                    bw.close();
-                    fw.close();
-
-                    JOptionPane.showMessageDialog(null, "Successfuly Edited.");
-
-                }
-            }
-
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, "Error!!");
+        customer.setID(id.getText());
+        customer.setName(name.getText());
+        customer.setPhone(phone.getText());
+        
+        if(checkData() && custTable.getSelectedRowCount() == 1) {
+            customer.edit(custTable);
+            JOptionPane.showMessageDialog(null, "Successfuly Edited.");
         }
+        else
+            JOptionPane.showMessageDialog(null, "Incomplete Information!! \nPlease Complete Information and select only one row!!");
     }//GEN-LAST:event_editMouseClicked
 
-    
     private void deleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deleteMouseClicked
-        Files f = new Files();
         Methods method = new Methods();
         method.delete(f.getCustomerFile(), custTable);
     }//GEN-LAST:event_deleteMouseClicked
 
-    
     private void addMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addMouseClicked
-        countLine();
+        customer.setID(id.getText());
+        customer.setName(name.getText());
+        customer.setPhone(phone.getText());
 
         if(checkData()) {
-            JOptionPane.showMessageDialog(null, "Operation failed !!", "Error!!", JOptionPane.ERROR_MESSAGE);
-        }
-        else if(addData()) {
+            customer.add(this.getTable());
             JOptionPane.showMessageDialog(null, "Successfuly Added.");
-            name.setText("");
-            id.setText("");
-            phone.setText("");
-            
-            DefaultTableModel model = (DefaultTableModel)custTable.getModel();
-            model.setNumRows(0);
-
-            try {
-                File myfile = new File("D:\\Z - PC\\Computer Science\\level 2\\JAVA\\Project\\myfolder\\customer.txt");
-
-                Scanner input = new Scanner(myfile);
-                while (input.hasNext()) {
-                    String line = input.nextLine();
-                    String[] row = line.split("\t");
-                    model.addRow(row);
-                }
-            } catch (FileNotFoundException ex) {
-
-            }
         }
-        else {
+        else
             JOptionPane.showMessageDialog(null, "Operation failed !!", "Error!!", JOptionPane.ERROR_MESSAGE);
-        }
-        
     }//GEN-LAST:event_addMouseClicked
-
     
     public static void main(String args[]) {
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -472,9 +371,7 @@ public class CustomerWindow extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(CustomerWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-        //</editor-fold>
 
-        
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new CustomerWindow().setVisible(true);
@@ -502,6 +399,6 @@ public class CustomerWindow extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextField name;
-    private javax.swing.JPasswordField phone;
+    private javax.swing.JTextField phone;
     // End of variables declaration//GEN-END:variables
 }

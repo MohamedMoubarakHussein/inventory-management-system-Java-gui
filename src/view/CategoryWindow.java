@@ -9,70 +9,14 @@ import javax.swing.table.DefaultTableModel;
 
 public class CategoryWindow extends javax.swing.JFrame {
 
-    private int line, currentRow;
+    CategoryMethod category = new CategoryMethod();
+    Files f = new Files();
+    Methods method = new Methods();
     
     public CategoryWindow() {
         initComponents();
+        method.showData(f.getCategoryFile(), this.getTable());
     }
-
-    
-    boolean addData(){
-        try {
-            RandomAccessFile raf = new RandomAccessFile("D:\\Z - PC\\Computer Science\\level 2\\JAVA\\Project\\myfolder\\category.txt", "rw");
-            for(int i=0 ; i < line ; i++){
-                raf.readLine();
-            }
-            raf.writeBytes(idCat.getText() + "\t");
-            raf.writeBytes(name.getText() + "\t\n");
-            return true;
-
-        } catch (IOException ex) {
-            return false;
-        }
-    }
-    
-    boolean checkData(){
-        if(idCat.getText().equals("")||name.getText().equals(""))
-            return true;
-        else
-            return false;
-    }
-      
-    void countLine() {
-        try {
-            line =1;
-            RandomAccessFile raf = new RandomAccessFile("D:\\Z - PC\\Computer Science\\level 2\\JAVA\\Project\\myfolder\\category.txt", "rw");
-            while(raf.readLine() != null){
-                line++;
-            }
-            System.out.println("number of line: " + line);
-            
-        } catch (FileNotFoundException ex) {
-            
-        } catch (IOException ex) {
-            
-        }
-
-    }
-  
-    void showCat(){
-        DefaultTableModel model = (DefaultTableModel) categoryTable.getModel();
-
-        try {
-            File myfile = new File("D:\\Z - PC\\Computer Science\\level 2\\JAVA\\Project\\myfolder\\category.txt");
-            Scanner input = new Scanner(myfile);
-
-            while (input.hasNext()) {
-                String line = input.nextLine();
-                String[] row = line.split("\t");
-                model.addRow(row);
-            }
-
-        } catch (FileNotFoundException ex) {
-
-        }
-    }
-  
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -88,7 +32,7 @@ public class CategoryWindow extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         categoryTable = new javax.swing.JTable();
         jLabel3 = new javax.swing.JLabel();
-        idCat = new javax.swing.JTextField();
+        id = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         name = new javax.swing.JTextField();
@@ -195,8 +139,8 @@ public class CategoryWindow extends javax.swing.JFrame {
         jLabel3.setForeground(new java.awt.Color(255, 51, 51));
         jLabel3.setText("Category List");
 
-        idCat.setFont(new java.awt.Font("Century Schoolbook", 1, 20)); // NOI18N
-        idCat.setForeground(new java.awt.Color(255, 51, 51));
+        id.setFont(new java.awt.Font("Century Schoolbook", 1, 20)); // NOI18N
+        id.setForeground(new java.awt.Color(255, 51, 51));
 
         jLabel9.setFont(new java.awt.Font("Century Schoolbook", 1, 24)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 51, 51));
@@ -252,7 +196,7 @@ public class CategoryWindow extends javax.swing.JFrame {
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                             .addComponent(jLabel10)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(idCat, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(id, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                             .addComponent(jLabel9)
                             .addGap(18, 18, 18)
@@ -287,7 +231,7 @@ public class CategoryWindow extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(100, 100, 100)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(idCat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(id, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel10))
                         .addGap(20, 20, 20)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -318,6 +262,17 @@ public class CategoryWindow extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    public DefaultTableModel getTable() {
+        return (DefaultTableModel)categoryTable.getModel();
+    }
+    
+    boolean checkData() {
+        if(!id.getText().isEmpty() && !name.getText().isEmpty())
+            return true;
+        else
+            return false;
+    }
+    
     private void backMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_backMouseClicked
         new Home().setVisible(true);
         this.dispose();
@@ -327,79 +282,33 @@ public class CategoryWindow extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_exitAppMouseClicked
 
-    
     private void deleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deleteMouseClicked
-        Files f = new Files();
         Methods method = new Methods();
         method.delete(f.getCategoryFile(), categoryTable);
     }//GEN-LAST:event_deleteMouseClicked
 
     private void editMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_editMouseClicked
-        String path = "D:\\Z - PC\\Computer Science\\level 2\\JAVA\\Project\\myfolder\\category.txt";
-        File myfile = new File(path);
-
-        try {
-            FileWriter fw = new FileWriter(myfile);
-            BufferedWriter bw = new BufferedWriter(fw);
-
-            DefaultTableModel model = (DefaultTableModel) categoryTable.getModel();
-
-            currentRow = categoryTable.getSelectedRow();
-            model.setValueAt(idCat.getText(), currentRow, 0);
-            model.setValueAt(name.getText(), currentRow, 1);
-            if (categoryTable.getSelectedRowCount() == 1) {
-                for (int i = 0; i < categoryTable.getRowCount(); i++) {
-                    for (int j = 0; j < categoryTable.getColumnCount(); j++) {
-
-                        bw.write(categoryTable.getValueAt(i, j) + "\t");
-                    }
-                    bw.newLine();
-                }
-
-                bw.close();
-                fw.close();
-
-                JOptionPane.showMessageDialog(null, "Successfuly Edited.");
-
-            } else {
-                JOptionPane.showMessageDialog(null, "Please Clicked in \"SHOW USERS\" First\nThen Select one Row from table!!");
-            }
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, "Error!!");
-
+        category.setID(id.getText());
+        category.setName(name.getText());
+        
+        if(checkData() && categoryTable.getSelectedRowCount() == 1) {
+            category.edit(categoryTable);
+            JOptionPane.showMessageDialog(null, "Successfuly Edited.");
         }
+        else
+            JOptionPane.showMessageDialog(null, "Incomplete Information!! \nPlease Complete Information and select only one row!!");
     }//GEN-LAST:event_editMouseClicked
 
     private void addMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addMouseClicked
-        countLine();
+        category.setID(id.getText());
+        category.setName(name.getText());
 
         if(checkData()) {
+            category.add(this.getTable());
+            JOptionPane.showMessageDialog(null, "Successfuly Added.");
+        }
+        else
             JOptionPane.showMessageDialog(null, "Operation failed !!", "Error!!", JOptionPane.ERROR_MESSAGE);
-        }
-        else if(addData()) {
-            JOptionPane.showMessageDialog(null, "Successfuly added.");
-            idCat.setText("");
-            name.setText("");
-
-            DefaultTableModel model = (DefaultTableModel)categoryTable.getModel();
-            model.setNumRows(0);
-
-            try {
-                File myfile = new File("D:\\Z - PC\\Computer Science\\level 2\\JAVA\\Project\\myfolder\\category.txt");
-
-                Scanner input = new Scanner(myfile);
-                while (input.hasNext()) {
-                    String line = input.nextLine();
-                    String[] row = line.split("\t");
-                    model.addRow(row);
-                }
-            } catch (FileNotFoundException ex) {
-
-            }
-        }
-        else {
-            JOptionPane.showMessageDialog(null, "Operation failed !!", "Error!!", JOptionPane.ERROR_MESSAGE);
-        }
     }//GEN-LAST:event_addMouseClicked
 
     public static void main(String args[]) {
@@ -439,7 +348,7 @@ public class CategoryWindow extends javax.swing.JFrame {
     private javax.swing.JButton delete;
     private javax.swing.JButton edit;
     private javax.swing.JButton exitApp;
-    private javax.swing.JTextField idCat;
+    private javax.swing.JTextField id;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;

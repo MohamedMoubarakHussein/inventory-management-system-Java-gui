@@ -155,7 +155,7 @@ public class Start extends javax.swing.JFrame {
         } catch (Exception ex) {
             System.out.println("Error");
         }
-        new LogInWindow().setVisible(true);
+        new LogIn().setVisible(true);
         start.dispose();
     }
     

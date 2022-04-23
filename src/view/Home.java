@@ -1,13 +1,7 @@
 package view;
 
-import controller.*;
-import model.*;
-
 public class Home extends javax.swing.JFrame {
-
-    Files f = new Files();
-    Methods method = new Methods();
-   
+       
     public Home() {
         initComponents();
     }
@@ -284,41 +278,27 @@ public class Home extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void productMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_productMouseClicked
-        ProductWindow product = new ProductWindow();
-        product.setVisible(true);
-
-        method.showData(f.getProductFile(), product.getProductTable());
+        new ProductWindow().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_productMouseClicked
 
     private void categoryMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_categoryMouseClicked
-        CategoryWindow categroy = new CategoryWindow();
-        categroy.setVisible(true);
-        categroy.showCat();
-
+        new CategoryWindow().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_categoryMouseClicked
 
     private void customerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_customerMouseClicked
-        CustomerWindow customer = new CustomerWindow();
-        customer.setVisible(true);
-        customer.showCust();
-
+        new CustomerWindow().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_customerMouseClicked
 
     private void orderMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_orderMouseClicked
-        Order order = new Order();
-        order.setVisible(true);
-        order.showCust();
-        order.showProdut();
-        order.getToday();
-
+        new OrderWindow().setVisible(true);        
         this.dispose();
     }//GEN-LAST:event_orderMouseClicked
 
     private void logOutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logOutMouseClicked
-        new LogInWindow().setVisible(true);
+        new LogIn().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_logOutMouseClicked
 
@@ -327,13 +307,9 @@ public class Home extends javax.swing.JFrame {
     }//GEN-LAST:event_exitMouseClicked
 
     private void usersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_usersMouseClicked
-        UserWindow user = new UserWindow();
-        user.setVisible(true);
-
-        method.showData(f.getMyFile(), user.getUserTable());
+        new AdminWindow().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_usersMouseClicked
-
 
     public static void main(String args[]) {
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -359,7 +335,6 @@ public class Home extends javax.swing.JFrame {
         //</editor-fold>
         
         new Home().setVisible(true);
-            
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables

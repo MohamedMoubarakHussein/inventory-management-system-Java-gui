@@ -11,6 +11,7 @@ public class Files {
     private File product = new File("D:\\Z - PC\\Computer Science\\level 2\\JAVA\\Project\\myfolder\\product.txt");
     private File customer = new File("D:\\Z - PC\\Computer Science\\level 2\\JAVA\\Project\\myfolder\\customer.txt");
     private File category = new File("D:\\Z - PC\\Computer Science\\level 2\\JAVA\\Project\\myfolder\\category.txt");
+    private File order = new File("D:\\Z - PC\\Computer Science\\level 2\\JAVA\\Project\\myfolder\\order.txt");
 
     
     public Files() {
@@ -30,6 +31,10 @@ public class Files {
     }
     
     public File getCategoryFile() {
+        return this.category;
+    }
+    
+    public File getOrderFile() {
         return this.category;
     }
     

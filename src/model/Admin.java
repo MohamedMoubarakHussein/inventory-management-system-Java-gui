@@ -1,20 +1,22 @@
 package model;
 
+import controller.*;
+
 public class Admin {
 
     private String name;
-    private String id;
+    private int id;
     private String password;
+    private AdminMethod admin = new AdminMethod();
     
     public Admin() {
 
     }
 
-    public Admin(String name, String id, String password) {
+    public Admin(String name, int id, String password) {
         this.name = name;
         this.id = id;
         this.password = password;
-        
     }
 
     public void setName(String name) {
@@ -25,11 +27,11 @@ public class Admin {
         return this.name;
     }
 
-    public void setID(String id) {
+    public void setID(int id) {
         this.id = id;
     }
 
-    public String getID() {
+    public int getID() {
         return this.id;
     }
 
@@ -39,6 +41,18 @@ public class Admin {
 
     public String getPassword() {
         return this.password;
+    }
+    
+    public void add() {
+        admin.add(this);
+    }
+    
+    public void edit(javax.swing.JTable table) {
+        admin.edit(this, table);
+    }
+    
+    public void delete(javax.swing.JTable table) {
+        admin.delete(this, table);
     }
     
 }

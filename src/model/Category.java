@@ -1,9 +1,12 @@
 package model;
 
+import controller.*;
+
 public class Category {
     
-    private String id;
+    private int id;
     private String name;
+    private CategoryMethod category = new CategoryMethod();
     
     public Category() {
         //
@@ -17,12 +20,24 @@ public class Category {
         return this.name;
     }
 
-    public void setID(String id) {
+    public void setID(int id) {
         this.id = id;
     }
 
-    public String getID() {
+    public int getID() {
         return this.id;
+    }
+    
+    public void add(javax.swing.JTable table) {
+        category.add(this, table);
+    }
+    
+    public void edit(javax.swing.JTable table) {
+        category.edit(this, table);
+    }
+    
+    public void delete(javax.swing.JTable table) {
+        category.delete(this, table);
     }
     
 }

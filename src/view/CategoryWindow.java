@@ -2,20 +2,18 @@ package view;
 
 import controller.*;
 import model.*;
-import java.util.*;
-import java.io.*;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 public class CategoryWindow extends javax.swing.JFrame {
 
-    CategoryMethod category = new CategoryMethod();
-    Files f = new Files();
-    Methods method = new Methods();
-    
+    private int currentRow;
+    Category category = new Category();
+    ShowData show = new ShowData();
+
     public CategoryWindow() {
         initComponents();
-        method.showData(f.getCategoryFile(), this.getTable());
+        show.DataInTable(categoryTable, "category");
     }
     
     @SuppressWarnings("unchecked")
@@ -132,6 +130,11 @@ public class CategoryWindow extends javax.swing.JFrame {
         categoryTable.setSelectionBackground(new java.awt.Color(255, 51, 51));
         categoryTable.setSelectionForeground(new java.awt.Color(51, 51, 51));
         categoryTable.setShowGrid(true);
+        categoryTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                categoryTableMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(categoryTable);
 
         jLabel3.setBackground(new java.awt.Color(255, 255, 255));
@@ -261,16 +264,17 @@ public class CategoryWindow extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    public DefaultTableModel getTable() {
-        return (DefaultTableModel)categoryTable.getModel();
-    }
     
     boolean checkData() {
         if(!id.getText().isEmpty() && !name.getText().isEmpty())
             return true;
         else
             return false;
+    }
+    
+    void setData() {
+        category.setID(Integer.valueOf(id.getText()));
+        category.setName(name.getText());
     }
     
     private void backMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_backMouseClicked
@@ -283,16 +287,19 @@ public class CategoryWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_exitAppMouseClicked
 
     private void deleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deleteMouseClicked
-        Methods method = new Methods();
-        method.delete(f.getCategoryFile(), categoryTable);
+        if(categoryTable.getSelectedRowCount() == 1) {
+            category.delete(categoryTable);
+            show.DataInTable(categoryTable, "Category");
+        }
+        else
+            JOptionPane.showMessageDialog(null, "Please Select only one Row from table!!");
     }//GEN-LAST:event_deleteMouseClicked
 
     private void editMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_editMouseClicked
-        category.setID(id.getText());
-        category.setName(name.getText());
-        
         if(checkData() && categoryTable.getSelectedRowCount() == 1) {
+            setData();
             category.edit(categoryTable);
+            show.DataInTable(categoryTable, "category");
             JOptionPane.showMessageDialog(null, "Successfuly Edited.");
         }
         else
@@ -300,16 +307,23 @@ public class CategoryWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_editMouseClicked
 
     private void addMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addMouseClicked
-        category.setID(id.getText());
-        category.setName(name.getText());
-
         if(checkData()) {
-            category.add(this.getTable());
-            JOptionPane.showMessageDialog(null, "Successfuly Added.");
+            setData();
+            category.add(categoryTable);
+            show.DataInTable(categoryTable, "category");
         }
         else
             JOptionPane.showMessageDialog(null, "Operation failed !!", "Error!!", JOptionPane.ERROR_MESSAGE);
     }//GEN-LAST:event_addMouseClicked
+
+    private void categoryTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_categoryTableMouseClicked
+        currentRow = categoryTable.getSelectedRow();
+        if (categoryTable.getSelectedRowCount() == 1)
+        {
+            id.setText(categoryTable.getValueAt(currentRow, 0) + "");
+            name.setText(categoryTable.getValueAt(currentRow, 1) + "");
+        }
+    }//GEN-LAST:event_categoryTableMouseClicked
 
     public static void main(String args[]) {
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

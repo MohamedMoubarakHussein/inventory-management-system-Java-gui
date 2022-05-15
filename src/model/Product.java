@@ -1,12 +1,16 @@
 package model;
 
+import controller.*;
+
 public class Product {
 
-    private String id;
+    private int id;
     private String name;
+    private int price;
     private String description;
-    private String quantity;
-    private String category;
+    private int quantity;
+    private javax.swing.JComboBox<String> category;
+    private ProductMethod product = new ProductMethod();
     
     public Product() {
         //
@@ -20,12 +24,20 @@ public class Product {
         return this.name;
     }
 
-    public void setID(String id) {
+    public void setID(int id) {
         this.id = id;
     }
 
-    public String getID() {
+    public int getID() {
         return this.id;
+    }
+    
+    public void setPrice(int price) {
+        this.price = price;
+    }
+
+    public int getPrice() {
+        return this.price;
     }
     
     public void setDescription(String description) {
@@ -36,20 +48,32 @@ public class Product {
         return this.description;
     }
     
-    public void setQuantity(String quantity) {
+    public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
 
-    public String getQuantity() {
+    public int getQuantity() {
         return this.quantity;
     }
     
-    public void setCategory(String category) {
+    public void setCategory(javax.swing.JComboBox<String> category) {
         this.category = category;
     }
 
-    public String getCategory() {
+    public javax.swing.JComboBox<String> getCategory() {
         return this.category;
+    }
+    
+    public void add(javax.swing.JTable table) {
+        product.add(this, table);
+    }
+    
+    public void edit(javax.swing.JTable table) {
+        product.edit(this, table);
+    }
+    
+    public void delete(javax.swing.JTable table) {
+        product.delete(this, table);
     }
     
 }

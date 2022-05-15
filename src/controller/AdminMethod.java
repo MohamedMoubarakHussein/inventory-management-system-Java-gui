@@ -1,62 +1,52 @@
 package controller;
 
 import model.*;
-import java.io.*;
+import java.sql.*;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
-public class AdminMethod extends Admin {
-    
-    Methods method = new Methods();
-    Files file = new Files();
+public class AdminMethod { 
+
+    Connection connection = Database.connect();
+    private String sql;
     
     public AdminMethod() {
-        
+        //Database.connect();
     }
-    
-    public void add() {
+
+    public void add(Admin admin) {
         try {
-            RandomAccessFile raf = new RandomAccessFile(file.getMyFile(), "rw");
-            for(int i=0 ; i<method.countLine(file.getMyFile()) ; i++){
-                raf.readLine();
-            }
-            raf.writeBytes(this.getName() + "\t");
-            raf.writeBytes(this.getID() + "\t");
-            raf.writeBytes(this.getPassword() + "\t\n");
-
-        } catch (IOException ex) {
-        }
-    }
-    
-    public void edit(javax.swing.JTable table) {
-        int currentRow;
-        try {
-            DefaultTableModel model = (DefaultTableModel) table.getModel();
-
-            FileWriter fw = new FileWriter(file.getMyFile());
-            BufferedWriter bw = new BufferedWriter(fw);
-
-            currentRow = table.getSelectedRow();
-            model.setValueAt(this.getName(), currentRow, 0);
-            model.setValueAt(this.getID(), currentRow, 1);
-            model.setValueAt(this.getPassword(), currentRow, 2);
-
-            if (table.getSelectedRowCount() == 1) {
-                for (int i = 0; i < table.getRowCount(); i++) {
-                    for (int j = 0; j < table.getColumnCount(); j++) {
-
-                        bw.write(table.getValueAt(i, j) + "\t");
-                    }
-                    bw.newLine();
-                }
-
-                bw.close();
-                fw.close();
-            }
+            PreparedStatement add = connection.prepareStatement("insert into Admin values(?,?,?)");
+            add.setInt(1, admin.getID());
+            add.setString(2, admin.getName());
+            add.setString(3, admin.getPassword());
+            add.executeUpdate();
+            JOptionPane.showMessageDialog(null, "Successfuly Created!\nGo To Login.");
             
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, "Error!!");
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Error!!", JOptionPane.ERROR_MESSAGE);
         }
     }
-    
+
+    public void edit(Admin admin, javax.swing.JTable table) {
+        try {
+            sql = "Update Admin set name='" + admin.getName() + "' ,id='" + admin.getID() + "' ,password='" + admin.getPassword() + "' where id ='" + table.getValueAt(table.getSelectedRow(), 0) + "'";
+            PreparedStatement edit = connection.prepareStatement(sql);
+            edit.executeUpdate();
+
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Error!!", JOptionPane.ERROR_MESSAGE);
+        } 
+    }
+
+    public void delete(Admin admin, javax.swing.JTable table) {
+        try {
+            sql = "Delete from Admin where id='" + table.getValueAt(table.getSelectedRow(), 0) + "' ";
+            PreparedStatement delete = connection.prepareStatement(sql);
+            delete.executeUpdate();
+            
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Error!!", JOptionPane.ERROR_MESSAGE);
+        }
+    }
 }

@@ -1,27 +1,26 @@
 package controller;
 
 import model.*;
-import java.util.Vector;
-import javax.swing.JOptionPane;
+import java.util.*;
 import javax.swing.table.DefaultTableModel;
 
-public class OrderMethod extends Order implements Controller{
+public class OrderMethod {
     
-    @Override
-    public void add(DefaultTableModel model) {
-        int currentRow = this.getTable().getSelectedRow();
-        Vector v = new Vector();
-        
-        v.add(this.getCustomerName());
-        v.add(this.getTable().getValueAt(currentRow, 1));
-        v.add(this.getQuantity());
-        v.add(this.getprice());
-        v.add(Integer.valueOf(this.getprice()) * Integer.valueOf(this.getQuantity()));
-        model.addRow(v);
+    public OrderMethod() {
+        //
     }
     
-    @Override
-    public void edit(javax.swing.JTable table){
-        //
+    public void add(Order order, DefaultTableModel model) {
+        int currentRow = order.getTable().getSelectedRow();
+        Vector vector = new Vector();
+        
+        vector.add(order.getCustomerName());
+        vector.add(order.getTable().getValueAt(currentRow, 1));
+        vector.add(order.getPrice());
+        vector.add(order.getQuantity());
+        vector.add(order.getPrice() * order.getQuantity());
+        vector.add(order.getDate());
+                
+        model.addRow(vector);
     }
 }

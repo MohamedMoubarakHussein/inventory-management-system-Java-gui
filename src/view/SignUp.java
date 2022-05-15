@@ -2,20 +2,14 @@ package view;
 
 import controller.*;
 import model.*;
-import java.util.*;
-import java.io.*;
 import javax.swing.JOptionPane;
 
 public class SignUp extends javax.swing.JFrame {
     
-    Files f = new Files();
-    AdminMethod admin = new AdminMethod();
-    Methods method = new Methods();
+    Admin admin = new Admin();
     
     public SignUp() {
         initComponents();
-        f.createFolder();
-        f.readOrWrite();
     }    
     
     @SuppressWarnings("unchecked")
@@ -263,11 +257,17 @@ public class SignUp extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    boolean checkData(){
+    boolean checkData() {
         if(!name.getText().isEmpty() && !id.getText().isEmpty() && !password.getText().isEmpty())
             return true;
         else
             return false;
+    }
+    
+    void setData() {
+        admin.setID(Integer.valueOf(id.getText()));
+        admin.setName(name.getText());
+        admin.setPassword(password.getText());
     }
     
     private void clearMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clearMouseClicked
@@ -281,21 +281,20 @@ public class SignUp extends javax.swing.JFrame {
     }//GEN-LAST:event_exitAppMouseClicked
 
     private void backLoginMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_backLoginMouseClicked
-        new LogIn().setVisible(true);
+        new LoginWindow().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_backLoginMouseClicked
 
     private void createAccountMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_createAccountMouseClicked
-        admin.setID(id.getText());
-        admin.setName(name.getText());
-        admin.setPassword(password.getText());
-        
         if(checkData()) {
+            setData();
             admin.add();
-            JOptionPane.showMessageDialog(null, "Successfuly Created!\nGo To Login.");
+            
+            this.dispose();
+            new LoginWindow().setVisible(true);
         }
         else
-            JOptionPane.showMessageDialog(null, "Operation failed !!", "Error!!", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Incomplete Information!");
     }//GEN-LAST:event_createAccountMouseClicked
 
     public static void main(String args[]) {
@@ -319,9 +318,6 @@ public class SignUp extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(SignUp.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
         //</editor-fold>
 
         new SignUp().setVisible(true);

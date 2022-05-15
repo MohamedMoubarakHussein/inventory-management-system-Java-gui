@@ -2,20 +2,18 @@ package view;
 
 import controller.*;
 import model.*;
-import java.util.*;
-import java.io.*;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 public class CustomerWindow extends javax.swing.JFrame {
 
-    CustomerMethod customer = new CustomerMethod();
-    Methods method = new Methods();
-    Files f = new Files();
-    
+    private int currentRow;
+    Customer customer = new Customer();
+    ShowData show = new ShowData();
+
     public CustomerWindow() {
         initComponents();
-        method.showData(f.getCustomerFile(), this.getTable());
+        show.DataInTable(customerTable, "Customer");
     }
 
     @SuppressWarnings("unchecked")
@@ -25,7 +23,7 @@ public class CustomerWindow extends javax.swing.JFrame {
         jPanel4 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        custTable = new javax.swing.JTable();
+        customerTable = new javax.swing.JTable();
         id = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
@@ -59,8 +57,8 @@ public class CustomerWindow extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
-        custTable.setFont(new java.awt.Font("Century Schoolbook", 3, 20)); // NOI18N
-        custTable.setModel(new javax.swing.table.DefaultTableModel(
+        customerTable.setFont(new java.awt.Font("Century Schoolbook", 3, 20)); // NOI18N
+        customerTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -68,12 +66,17 @@ public class CustomerWindow extends javax.swing.JFrame {
                 "Cust ID", "Name", "Phone"
             }
         ));
-        custTable.setIntercellSpacing(new java.awt.Dimension(0, 0));
-        custTable.setRowHeight(25);
-        custTable.setSelectionBackground(new java.awt.Color(255, 51, 51));
-        custTable.setSelectionForeground(new java.awt.Color(51, 51, 51));
-        custTable.setShowGrid(true);
-        jScrollPane2.setViewportView(custTable);
+        customerTable.setIntercellSpacing(new java.awt.Dimension(0, 0));
+        customerTable.setRowHeight(25);
+        customerTable.setSelectionBackground(new java.awt.Color(255, 51, 51));
+        customerTable.setSelectionForeground(new java.awt.Color(51, 51, 51));
+        customerTable.setShowGrid(true);
+        customerTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                customerTableMouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(customerTable);
 
         id.setFont(new java.awt.Font("Century Schoolbook", 1, 20)); // NOI18N
         id.setForeground(new java.awt.Color(255, 51, 51));
@@ -149,7 +152,7 @@ public class CustomerWindow extends javax.swing.JFrame {
 
         jLabel10.setFont(new java.awt.Font("Century Schoolbook", 1, 24)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(255, 51, 51));
-        jLabel10.setText("Cust ID");
+        jLabel10.setText("ID");
 
         jLabel11.setFont(new java.awt.Font("Century Schoolbook", 1, 24)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(255, 51, 51));
@@ -210,6 +213,10 @@ public class CustomerWindow extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLabel3)
+                .addGap(167, 167, 167))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -217,8 +224,8 @@ public class CustomerWindow extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addContainerGap()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jLabel10)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(id, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -240,12 +247,8 @@ public class CustomerWindow extends javax.swing.JFrame {
                         .addGap(93, 93, 93)
                         .addComponent(delete, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 484, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(17, 17, 17))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jLabel3)
-                .addGap(167, 167, 167))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 491, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -298,17 +301,19 @@ public class CustomerWindow extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
     
-    public DefaultTableModel getTable() {
-        return (DefaultTableModel)custTable.getModel();
-    }
-    
-    boolean checkData(){
+    boolean checkData() {
         if(!name.getText().isEmpty() && !id.getText().isEmpty() && !phone.getText().isEmpty())
             return true;
         else
             return false;
     }
        
+    void setData() {
+        customer.setID(Integer.valueOf(id.getText()));
+        customer.setName(name.getText());
+        customer.setPhone(phone.getText());
+    }
+    
     private void exitAppMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitAppMouseClicked
         System.exit(0);
     }//GEN-LAST:event_exitAppMouseClicked
@@ -319,12 +324,10 @@ public class CustomerWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_backHomeMouseClicked
 
     private void editMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_editMouseClicked
-        customer.setID(id.getText());
-        customer.setName(name.getText());
-        customer.setPhone(phone.getText());
-        
-        if(checkData() && custTable.getSelectedRowCount() == 1) {
-            customer.edit(custTable);
+        if(checkData() && customerTable.getSelectedRowCount() == 1) {
+            setData();
+            customer.edit(customerTable);
+            show.DataInTable(customerTable, "Customer");
             JOptionPane.showMessageDialog(null, "Successfuly Edited.");
         }
         else
@@ -332,22 +335,33 @@ public class CustomerWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_editMouseClicked
 
     private void deleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deleteMouseClicked
-        Methods method = new Methods();
-        method.delete(f.getCustomerFile(), custTable);
+        if(customerTable.getSelectedRowCount() == 1) {
+            customer.delete(customerTable);
+            show.DataInTable(customerTable, "Customer");
+        }
+        else
+            JOptionPane.showMessageDialog(null, "Please Select only one Row from table!!");
     }//GEN-LAST:event_deleteMouseClicked
 
     private void addMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addMouseClicked
-        customer.setID(id.getText());
-        customer.setName(name.getText());
-        customer.setPhone(phone.getText());
-
         if(checkData()) {
-            customer.add(this.getTable());
-            JOptionPane.showMessageDialog(null, "Successfuly Added.");
+            setData();
+            customer.add(customerTable);
+            show.DataInTable(customerTable, "Customer");
         }
         else
             JOptionPane.showMessageDialog(null, "Operation failed !!", "Error!!", JOptionPane.ERROR_MESSAGE);
     }//GEN-LAST:event_addMouseClicked
+
+    private void customerTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_customerTableMouseClicked
+        currentRow = customerTable.getSelectedRow();
+        if (customerTable.getSelectedRowCount() == 1)
+        {
+            id.setText(customerTable.getValueAt(currentRow, 0) + "");
+            name.setText(customerTable.getValueAt(currentRow, 1) + "");
+            phone.setText(customerTable.getValueAt(currentRow, 2) + "");
+        }
+    }//GEN-LAST:event_customerTableMouseClicked
     
     public static void main(String args[]) {
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -372,17 +386,13 @@ public class CustomerWindow extends javax.swing.JFrame {
         }
         //</editor-fold>
 
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new CustomerWindow().setVisible(true);
-            }
-        });
+        new CustomerWindow().setVisible(true);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton add;
     private javax.swing.JButton backHome;
-    private javax.swing.JTable custTable;
+    private javax.swing.JTable customerTable;
     private javax.swing.JButton delete;
     private javax.swing.JButton edit;
     private javax.swing.JButton exitApp;

@@ -1,10 +1,13 @@
 package model;
 
+import controller.*;
+
 public class Customer {
     
-    private String id;
+    private int id;
     private String name;
     private String phone;
+    private CustomerMethod customer = new CustomerMethod();
     
     public Customer() {
         //
@@ -18,11 +21,11 @@ public class Customer {
         return this.name;
     }
 
-    public void setID(String id) {
+    public void setID(int id) {
         this.id = id;
     }
 
-    public String getID() {
+    public int getID() {
         return this.id;
     }
     
@@ -32,6 +35,18 @@ public class Customer {
 
     public String getPhone() {
         return this.phone;
+    }
+    
+    public void add(javax.swing.JTable table) {
+        customer.add(this, table);
+    }
+    
+    public void edit(javax.swing.JTable table) {
+        customer.edit(this, table);
+    }
+    
+    public void delete(javax.swing.JTable table) {
+        customer.delete(this, table);
     }
     
 }

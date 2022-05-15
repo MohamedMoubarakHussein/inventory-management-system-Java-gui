@@ -1,9 +1,13 @@
 package view;
 
+import javax.swing.JOptionPane;
+
 public class Start extends javax.swing.JFrame {
 
     public Start() {
         initComponents();
+        this.setVisible(true);
+        this.loading();
     }
     
     @SuppressWarnings("unchecked")
@@ -119,6 +123,19 @@ public class Start extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    void loading() {        
+        try {
+            for (int i = 0; i <= 100; i++) {
+                Thread.sleep(10);
+                percentage.setText(i + "%");
+            }
+            new LoginWindow().setVisible(true);
+            this.dispose();
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Error!!", JOptionPane.ERROR_MESSAGE);
+        }
+    }
     
     public static void main(String args[]) {
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -143,20 +160,7 @@ public class Start extends javax.swing.JFrame {
         }
         //</editor-fold>
 
-        Start start = new Start();
-        start.setVisible(true);  
-            
-        try {
-            for (int i = 0; i <= 100; i++) {
-                Thread.sleep(10);
-//              start.ProgressBar.setValue(i);
-                start.percentage.setText(i + "%");
-            }
-        } catch (Exception ex) {
-            System.out.println("Error");
-        }
-        new LogIn().setVisible(true);
-        start.dispose();
+        new Start();
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables

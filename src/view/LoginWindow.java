@@ -301,7 +301,7 @@ public class LoginWindow extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(LoginWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-        System.out.println("main in gui");
+
         new LoginWindow().setVisible(true);
     }
 

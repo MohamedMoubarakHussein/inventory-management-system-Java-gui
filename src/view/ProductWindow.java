@@ -407,8 +407,8 @@ public class ProductWindow extends javax.swing.JFrame {
             id.setText(productTable.getValueAt(currentRow, 0) + "");
             name.setText(productTable.getValueAt(currentRow, 1) + "");
             price.setText(productTable.getValueAt(currentRow, 2) + "");
-            quantity.setText(productTable.getValueAt(currentRow, 2) + "");
-            description.setText(productTable.getValueAt(currentRow, 2) + "");
+            quantity.setText(productTable.getValueAt(currentRow, 3) + "");
+            description.setText(productTable.getValueAt(currentRow, 4) + "");
         }
     }//GEN-LAST:event_productTableMouseClicked
 

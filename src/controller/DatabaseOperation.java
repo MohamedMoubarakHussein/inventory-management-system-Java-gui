@@ -2,14 +2,21 @@ package controller;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
 public class  DatabaseOperation {
+    Database database ;
+    Connection connection ;
     
-    Connection connection = Database.connect();
     
+    public DatabaseOperation(Database databaseAvailable) {
+    		this.database = databaseAvailable;
+    		connection = database.connect();
+    }
 
+    
     public boolean add(String statment , boolean IntType[] , String command[]) {
         try {
         	int id = 1;
@@ -58,4 +65,9 @@ public class  DatabaseOperation {
             JOptionPane.showMessageDialog(null, e.getMessage(), "Error!!", JOptionPane.ERROR_MESSAGE);
         }
     }
+    
+  
+  
+  
+   
 }

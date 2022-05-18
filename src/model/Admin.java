@@ -9,8 +9,9 @@ public class Admin {
     private String password;
     private AdminMethod admin = new AdminMethod();
     
+    
     public Admin() {
-
+    	
     }
 
     public Admin(String name, int id, String password) {

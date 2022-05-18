@@ -3,8 +3,8 @@ package controller;
 import model.*;
 import javax.swing.JTable;
 
-public class CustomerMethod {
-
+public class CustomerMethod  extends DatabaseConnection{
+	
     private String sql;
 
 
@@ -14,7 +14,7 @@ public class CustomerMethod {
         boolean[] IntType = {true,false,false};
         String[] command = {String.valueOf(customer.getID()),customer.getName(),customer.getPhone()};
         
-        new DatabaseOperation().add(statment, IntType, command);
+        database.add(statment, IntType, command);
               
     }
 
@@ -22,14 +22,14 @@ public class CustomerMethod {
         sql = "Update customer set name='" + customer.getName() + "' ,id='" + customer.getID() + "' ,phone='"
                 + customer.getPhone() + "' where id ='" + table.getValueAt(table.getSelectedRow(), 0) + "'";
       
-        new DatabaseOperation().edit(sql);
+        database.edit(sql);
 
     }
 
     public void delete(Customer customer, JTable table) {
         sql = "Delete from customer where id='" + table.getValueAt(table.getSelectedRow(), 0) + "' ";
         
-        new DatabaseOperation().edit(sql);
+        database.edit(sql);
     }
 
 }

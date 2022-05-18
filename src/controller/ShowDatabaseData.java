@@ -3,32 +3,25 @@ package controller;
 import java.sql.*;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import net.proteanit.sql.DbUtils;
 
-public class ShowDatabaseData {
-    
-    private String sql;
+public class ShowDatabaseData extends DatabaseConnection {
 
-    ResultSet resultSet = null;
+	 
     
    
-
     public void DataInTable(javax.swing.JTable table, String tableName) {
-        try {
-        	Statement  statement = Database.connect().createStatement();
-            resultSet = statement.executeQuery("select * from " + tableName);
-            table.setModel(DbUtils.resultSetToTableModel(resultSet));
-            
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, e.getMessage(), "Error!!", JOptionPane.ERROR_MESSAGE);
-        }
+        sql = "select * from " + tableName;
+        ResultSet resultSet = ResultForSql(sql);
+        table.setModel(DbUtils.resultSetToTableModel(resultSet));
     }
+    
     
     public void DataInComboBox(javax.swing.JComboBox<String> category) {
         DefaultComboBoxModel model = new DefaultComboBoxModel();
         try {
-        	Statement statement = Database.connect().createStatement();
-            resultSet = statement.executeQuery("select * from category");
+           ResultSet resultSet = ResultForSql("select * from category");
             
             while(resultSet.next())
                 category.addItem(resultSet.getString("name"));
@@ -36,5 +29,16 @@ public class ShowDatabaseData {
         } catch(Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage(), "Error!!", JOptionPane.ERROR_MESSAGE);
         }
+    }
+    
+    
+    public ResultSet ResultForSql(String sql) {
+    	ResultSet notAllowed= null;
+    	try {
+			return database.connection.createStatement().executeQuery(sql);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+    	return notAllowed;
     }
 }

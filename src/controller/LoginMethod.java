@@ -4,15 +4,23 @@ import java.sql.*;
 import javax.swing.JOptionPane;
 import model.*;
 
-public class LoginMethod {
-		Connection connection = Database.connect();
-		private String sql ;
+public class LoginMethod extends DatabaseConnection {
+	
   
+	  public PreparedStatement checkLogin(String sql) {
+	    	PreparedStatement Check = null ;
+	    	try {
+				Check = database.connection.prepareStatement(sql);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+	    	return Check;
+	    }
 
     public boolean check(Login login) {
         try {
         	sql =  "select * from Admin where id="+login.getID()+" and password="+login.getPassword();
-            PreparedStatement check=connection.prepareStatement(sql);
+            PreparedStatement check=checkLogin(sql);
             ResultSet result = check.executeQuery();
                     
             if (result.next()) 
@@ -23,7 +31,7 @@ public class LoginMethod {
             
         } finally {
             try {
-                connection.close();
+            
                 
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, e.getMessage(), "Error!!", JOptionPane.ERROR_MESSAGE);

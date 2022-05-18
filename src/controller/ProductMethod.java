@@ -3,8 +3,8 @@ package controller;
 import model.*;
 import javax.swing.JTable;
 
-public class ProductMethod {
-
+public class ProductMethod extends DatabaseConnection{
+	  
     private String sql;
 
 
@@ -16,7 +16,7 @@ public class ProductMethod {
         		    ,product.getDescription() , product.getCategory().getSelectedItem().toString()};
         
         
-        new DatabaseOperation().add(statment, IntType, command);    
+        database.add(statment, IntType, command);    
     }
 
     public void edit(Product product, JTable table) {
@@ -25,13 +25,13 @@ public class ProductMethod {
                 + product.getDescription() + "' ,category='" + product.getCategory().getSelectedItem()
                 + "' where id ='" + table.getValueAt(table.getSelectedRow(), 0) + "'";
        
-        new DatabaseOperation().edit(sql);
+        database.edit(sql);
     }
 
     public void delete(Product product, JTable table) {
         sql = "Delete from Product where id='" + table.getValueAt(table.getSelectedRow(), 0) + "' ";
        
-        new DatabaseOperation().delete(sql);
+        database.delete(sql);
     }
 
 }

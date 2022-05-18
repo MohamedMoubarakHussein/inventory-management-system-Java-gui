@@ -9,9 +9,7 @@ public class Login {
     private LoginMethod login = new LoginMethod();
     private static Login Instance;
     
-    private Login() {
-        //
-    }
+    
     
     public static Login getInstance() {
     	if(Instance == null) {

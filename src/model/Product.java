@@ -12,9 +12,7 @@ public class Product {
     private javax.swing.JComboBox<String> category;
     private ProductMethod product = new ProductMethod();
     
-    public Product() {
-        //
-    }
+   
     
     public void setName(String name) {
         this.name = name;

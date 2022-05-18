@@ -9,9 +9,7 @@ public class Customer {
     private String phone;
     private CustomerMethod customer = new CustomerMethod();
     
-    public Customer() {
-        //
-    }
+   
     
     public void setName(String name) {
         this.name = name;

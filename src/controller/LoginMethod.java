@@ -5,23 +5,15 @@ import javax.swing.JOptionPane;
 import model.*;
 
 public class LoginMethod {
-
-    PreparedStatement check = null;
-    ResultSet result = null;
-    Connection connection = Database.connect();
-    private String sql;
-    
-    public LoginMethod() {
-
-    }
+		Connection connection = Database.connect();
+		private String sql ;
+  
 
     public boolean check(Login login) {
         try {
-            sql = "select * from Admin where id=? and password=?";
+        	sql =  "select * from Admin where id="+login.getID()+" and password="+login.getPassword();
             PreparedStatement check=connection.prepareStatement(sql);
-            check.setInt(1,login.getID());
-            check.setString(2, login.getPassword());
-            result = check.executeQuery();
+            ResultSet result = check.executeQuery();
                     
             if (result.next()) 
                 return true;

@@ -8,9 +8,7 @@ public class Category {
     private String name;
     private CategoryMethod category = new CategoryMethod();
     
-    public Category() {
-        //
-    }
+   
     
     public void setName(String name) {
         this.name = name;

@@ -13,10 +13,7 @@ public class Order {
     private String date;
     private OrderMethod order = new OrderMethod();
     
-    public Order() {
-        //
-    }
-    
+   
     public void setCustomerName(String name) {
         this.customerName = name;
     }

@@ -288,10 +288,11 @@ public class SignUp extends javax.swing.JFrame {
     private void createAccountMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_createAccountMouseClicked
         if(checkData()) {
             setData();
-            admin.add();
-            
-            this.dispose();
-            new LoginWindow().setVisible(true);
+            if(admin.add()) {
+                JOptionPane.showMessageDialog(null, "Successfuly Created!\nGo To Login.");
+                this.dispose();
+                new LoginWindow().setVisible(true);
+            }
         }
         else
             JOptionPane.showMessageDialog(this, "Incomplete Information!");

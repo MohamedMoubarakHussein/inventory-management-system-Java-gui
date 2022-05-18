@@ -444,8 +444,8 @@ public class OrderWindow extends javax.swing.JFrame {
     }
     
     boolean checkData() {
-        if(custTable.getSelectedRowCount() == 1 && productTable.getSelectedRowCount() == 1 
-                && customerName.getText() != "Name" && price.getText() != "price" && !quantity.getText().isEmpty())
+        if(custTable.getSelectedRowCount() == 1 && productTable.getSelectedRowCount() == 1 && 
+                customerName.getText() != "Name" && price.getText() != "price" && !quantity.getText().isEmpty())
             return true;
         else
             return false;
@@ -453,9 +453,10 @@ public class OrderWindow extends javax.swing.JFrame {
     
     void setData() {
         order.setCustomerName(customerName.getText());
+        order.setProduct(productTable.getValueAt(currentRow, 1).toString());
         order.setPrice(Integer.valueOf(price.getText()));
         order.setQuantity(Integer.valueOf(quantity.getText()));
-        order.setTable(productTable);
+        order.setTotal(Integer.valueOf(quantity.getText()) * Integer.valueOf(price.getText()));
         order.setDate(date.getText());
     }
     

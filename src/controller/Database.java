@@ -8,7 +8,7 @@ public class Database {
     private static Connection connection = null;
     
     public Database() {
-        //
+        
     }
     
     public static Connection connect() {

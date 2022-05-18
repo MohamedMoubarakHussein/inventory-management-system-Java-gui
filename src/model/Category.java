@@ -28,8 +28,8 @@ public class Category {
         return this.id;
     }
     
-    public void add(javax.swing.JTable table) {
-        category.add(this, table);
+    public void add() {
+        category.add(this);
     }
     
     public void edit(javax.swing.JTable table) {

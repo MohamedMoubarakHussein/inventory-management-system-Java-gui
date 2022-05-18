@@ -37,8 +37,8 @@ public class Customer {
         return this.phone;
     }
     
-    public void add(javax.swing.JTable table) {
-        customer.add(this, table);
+    public void add() {
+        customer.add(this);
     }
     
     public void edit(javax.swing.JTable table) {

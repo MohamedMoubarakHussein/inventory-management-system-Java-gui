@@ -301,7 +301,8 @@ public class AdminWindow extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
     
     boolean checkData() {
-        if(!name.getText().isEmpty() && !id.getText().isEmpty() && !password.getText().isEmpty() && userTable.getSelectedRowCount() == 1)
+        if(!name.getText().isEmpty() && !id.getText().isEmpty() && !password.getText().isEmpty() && 
+                userTable.getSelectedRowCount() == 1)
             return true;
         else
             return false;
@@ -344,8 +345,8 @@ public class AdminWindow extends javax.swing.JFrame {
 
     private void userTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_userTableMouseClicked
         currentRow = userTable.getSelectedRow();
-        if (userTable.getSelectedRowCount() == 1)
-        {
+        
+        if (userTable.getSelectedRowCount() == 1) {
             id.setText(userTable.getValueAt(currentRow, 0) + "");
             name.setText(userTable.getValueAt(currentRow, 1) + "");
             password.setText(userTable.getValueAt(currentRow, 2) + "");

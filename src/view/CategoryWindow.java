@@ -309,7 +309,7 @@ public class CategoryWindow extends javax.swing.JFrame {
     private void addMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addMouseClicked
         if(checkData()) {
             setData();
-            category.add(categoryTable);
+            category.add();
             show.DataInTable(categoryTable, "category");
         }
         else
@@ -318,8 +318,8 @@ public class CategoryWindow extends javax.swing.JFrame {
 
     private void categoryTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_categoryTableMouseClicked
         currentRow = categoryTable.getSelectedRow();
-        if (categoryTable.getSelectedRowCount() == 1)
-        {
+        
+        if (categoryTable.getSelectedRowCount() == 1) {
             id.setText(categoryTable.getValueAt(currentRow, 0) + "");
             name.setText(categoryTable.getValueAt(currentRow, 1) + "");
         }

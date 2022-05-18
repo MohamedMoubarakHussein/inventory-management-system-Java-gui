@@ -346,7 +346,7 @@ public class CustomerWindow extends javax.swing.JFrame {
     private void addMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addMouseClicked
         if(checkData()) {
             setData();
-            customer.add(customerTable);
+            customer.add();
             show.DataInTable(customerTable, "Customer");
         }
         else
@@ -355,8 +355,8 @@ public class CustomerWindow extends javax.swing.JFrame {
 
     private void customerTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_customerTableMouseClicked
         currentRow = customerTable.getSelectedRow();
-        if (customerTable.getSelectedRowCount() == 1)
-        {
+        
+        if (customerTable.getSelectedRowCount() == 1) {
             id.setText(customerTable.getValueAt(currentRow, 0) + "");
             name.setText(customerTable.getValueAt(currentRow, 1) + "");
             phone.setText(customerTable.getValueAt(currentRow, 2) + "");

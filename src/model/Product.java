@@ -64,8 +64,8 @@ public class Product {
         return this.category;
     }
     
-    public void add(javax.swing.JTable table) {
-        product.add(this, table);
+    public void add() {
+        product.add(this);
     }
     
     public void edit(javax.swing.JTable table) {

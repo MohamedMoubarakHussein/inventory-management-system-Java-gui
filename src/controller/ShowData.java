@@ -3,7 +3,6 @@ package controller;
 import java.sql.*;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
 import net.proteanit.sql.DbUtils;
 
 public class ShowData {
@@ -12,9 +11,7 @@ public class ShowData {
     Statement statement = null;
     ResultSet resultSet = null;
     
-    public ShowData() {
-        //Database.connect();
-    }
+   
 
     public void DataInTable(javax.swing.JTable table, String tableName) {
         sql = "select * from " + tableName;

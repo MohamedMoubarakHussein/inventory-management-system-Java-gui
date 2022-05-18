@@ -7,10 +7,19 @@ public class Login {
     private int id;
     private String Password;
     private LoginMethod login = new LoginMethod();
-
-    public Login() {
+    private static Login Instance;
+    
+    private Login() {
         //
     }
+    
+    public static Login getInstance() {
+    	if(Instance == null) {
+    		Instance =new Login();
+    	}
+    	return Instance;
+    }
+  
 
     public void setID(int id) {
         this.id = id;

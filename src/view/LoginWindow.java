@@ -6,7 +6,7 @@ import model.*;
 
 public class LoginWindow extends javax.swing.JFrame {
             
-    Login log = new Login();
+    Login log = Login.getInstance();
     
     public LoginWindow() {
         initComponents();

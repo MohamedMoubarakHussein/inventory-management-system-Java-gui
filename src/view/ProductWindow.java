@@ -346,7 +346,8 @@ public class ProductWindow extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
     
     boolean checkData() {
-        if(!id.getText().isEmpty() && !name.getText().isEmpty() && !quantity.getText().isEmpty() && !description.getText().isEmpty())
+        if(!id.getText().isEmpty() && !name.getText().isEmpty() && !quantity.getText().isEmpty() && 
+                !description.getText().isEmpty())
             return true;
         else
             return false;
@@ -384,7 +385,7 @@ public class ProductWindow extends javax.swing.JFrame {
     private void addMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addMouseClicked
         if(checkData()) {
             setData();
-            product.add(productTable);
+            product.add();
             show.DataInTable(productTable, "Product");
         }
         else
@@ -402,8 +403,8 @@ public class ProductWindow extends javax.swing.JFrame {
 
     private void productTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_productTableMouseClicked
         currentRow = productTable.getSelectedRow();
-        if (productTable.getSelectedRowCount() == 1)
-        {
+        
+        if (productTable.getSelectedRowCount() == 1) {
             id.setText(productTable.getValueAt(currentRow, 0) + "");
             name.setText(productTable.getValueAt(currentRow, 1) + "");
             price.setText(productTable.getValueAt(currentRow, 2) + "");

@@ -101,7 +101,7 @@ public class SignUp extends javax.swing.JFrame {
         backLogin.setBackground(new java.awt.Color(255, 255, 255));
         backLogin.setFont(new java.awt.Font("Century Schoolbook", 3, 30)); // NOI18N
         backLogin.setForeground(new java.awt.Color(255, 51, 51));
-        backLogin.setText("←");
+        backLogin.setText("â†�");
         backLogin.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 backLoginMouseClicked(evt);
@@ -288,10 +288,11 @@ public class SignUp extends javax.swing.JFrame {
     private void createAccountMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_createAccountMouseClicked
         if(checkData()) {
             setData();
-            admin.add();
-            
-            this.dispose();
-            new LoginWindow().setVisible(true);
+            if(admin.add()) {
+                JOptionPane.showMessageDialog(null, "Successfuly Created!\nGo To Login.");
+                this.dispose();
+                new LoginWindow().setVisible(true);
+            }
         }
         else
             JOptionPane.showMessageDialog(this, "Incomplete Information!");

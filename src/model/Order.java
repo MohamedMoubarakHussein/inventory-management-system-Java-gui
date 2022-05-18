@@ -6,10 +6,11 @@ import javax.swing.table.DefaultTableModel;
 public class Order {
     
     private String customerName;
+    private String product;
     private int price;
     private int quantity;
+    private int total;
     private String date;
-    private javax.swing.JTable table;
     private OrderMethod order = new OrderMethod();
     
     public Order() {
@@ -22,6 +23,14 @@ public class Order {
 
     public String getCustomerName() {
         return this.customerName;
+    }
+    
+    public void setProduct(String product) {
+        this.product = product;
+    }
+
+    public String getProduct() {
+        return this.product;
     }
     
     public void setPrice(int price) {
@@ -40,6 +49,14 @@ public class Order {
         return this.quantity;
     }
     
+    public void setTotal(int total) {
+        this.total = total;
+    }
+
+    public int getTotal() {
+        return this.total;
+    }
+    
     public void setDate(String date) {
         this.date = date;
     }
@@ -47,15 +64,7 @@ public class Order {
     public String getDate() {
         return this.date;
     }
-    
-    public void setTable(javax.swing.JTable table) {
-        this.table = table;
-    }
-
-    public javax.swing.JTable getTable() {
-        return this.table;
-    }
-    
+        
     public void add(DefaultTableModel model) {
         order.add(this, model);
     }

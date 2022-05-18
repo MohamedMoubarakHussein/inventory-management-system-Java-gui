@@ -43,8 +43,11 @@ public class Admin {
         return this.password;
     }
     
-    public void add() {
-        admin.add(this);
+    public boolean add() {
+        if(admin.add(this))
+            return true;
+        else 
+            return false;
     }
     
     public void edit(javax.swing.JTable table) {

@@ -8,15 +8,15 @@ Java, Java Swing, SQLite
 
 **use case digram **
 
-![Flow of auth](Requirements/Gateway/Flow%20of%20auth.png)
+![use case digram](Documentation%20&%20Vedio/use%20case%20digram.png)
 
 
 **activity digram digram **
 
-![Flow of auth](Requirements/Gateway/Flow%20of%20auth.png)
+![use case digram](Documentation%20&%20Vedio/activity%20digram.png)
 
 
 
 **erd digram **
 
-![Flow of auth](Requirements/Gateway/Flow%20of%20auth.png)
+![use case digram](Documentation%20&%20Vedio/erd.png)
